@@ -1,0 +1,7 @@
+<?PHP
+include ('squid.class.php');
+$tal=new squidConf();
+print_r($tal->getAclClass());
+echo '<br><br>';
+print_r($tal->getAclClass('Time'));
+?>

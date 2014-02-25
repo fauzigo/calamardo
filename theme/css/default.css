@@ -1,0 +1,392 @@
+
+/* log Channel */
+
+#log_chanel {
+	width: 50%;
+	float: left;
+	height: 90%;
+	border: 2px solid;
+	border-color: #5E740B;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	background: #FFFFFF;
+	overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+#log_chanel .in{
+	color: #0e8b0e;
+}
+
+#log_chanel .out{
+	color: #ff0000;
+}
+
+/* End Channel */
+
+
+/* Menu de undo y redo */
+
+#menusillo {
+	width: 100%;
+	height: 32px;
+}
+
+#sub_menusillo {
+	float: right;
+}
+
+#undo {
+	height: 32px;
+	float: left;
+}
+
+#redo {
+	height: 32px;
+	float: right;
+}
+
+/* FIN de undo y redo */
+
+
+
+/* Warn Channel */
+
+#warn_chanel {
+	width: 49%;
+	float: right;
+	height: 90%;
+	border: 2px solid;
+	border-color: #FECA40;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	background: #FFFFFF;
+	text-align: center;
+}
+
+
+.erno {
+	color: #ff0000;
+	font-weight: bold;
+	padding-top: 32px;
+	vertical-align: middle;
+}
+
+.simple_warn {
+	color: #ff0000;
+	font-weight: bold;
+	padding-top: 32px;
+	vertical-align: middle;
+}
+
+/* End Warn Channel */
+
+
+
+#gosh_input {
+	visibility: hidden;
+	height: 0px;
+}
+
+#gosh_input input{
+	visibility: hidden;
+	height: 0px;
+}
+
+
+
+.log{
+	padding: 0 0 0 15px;
+}
+
+.selectable {
+	cursor: pointer;
+}
+
+.ui-draggable {
+	cursor: pointer;
+}
+
+/* Acl cart conten stuff */
+
+#acl-cart{
+	margin: 0 auto;
+	min-height: 200px;
+	overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.acl-name input {
+	width: 10px;
+}
+
+ol {
+	padding: 5px 35px;
+}
+
+/* End Acl Cart Content stuff */
+
+
+
+
+/*  acl params 
+ * 
+ * TODO reduce classes
+ * 
+ * */
+
+.acl_titles {
+	font-weight: bold;
+}
+
+
+.param_header {
+	/* padding: 1em; */
+}
+
+.param_fields{
+	padding: 1em; 
+}
+
+.param_fields input{
+	width: 80%; 
+}
+
+.campo label {
+	float:left; /* Take out of flow so the input starts at the same height */
+	width:4em;
+} 
+
+.case_sensitive label{
+	width: 100%;
+	padding: 0 0 10px 0; 
+}
+
+.case_sensitive {
+	padding: 0 0 10px 0; 
+}
+
+
+.separated{
+	padding: 20px 0 0 0;
+}
+
+
+
+
+legend {
+	*margin-left:-7px; /* A hack that only ie reads to position the legend in the same place cross browser */
+	color: #222222;
+	font-size: 1.4em;
+}
+
+fieldset {
+	border:1px solid #dedede; /* Default fieldset borders vary cross browser, so make them the same */
+}
+fieldset div {
+	overflow:hidden; /* Contain the floating elements */
+	display:inline-block; /* Give layout in ie to contain float */
+}
+fieldset div {display:block;} /* Reset element back to block leaving layout in ie */
+/* End acl params */
+
+
+/* Acl table always valing top */
+#acl-manager td {
+	vertical-align: top;
+}
+
+
+
+/* */
+
+#catalog li{
+	list-style: none;
+	font-weight: bold;
+} 
+
+#catalog ul{
+	padding-left: 0;
+}
+
+#catalog .ui-accordion-content{
+	padding: 0 5px;
+}
+
+.even {
+}
+
+
+
+.odd {
+	background-color: #b1b1b1;
+}
+
+/* */
+
+
+/* the console style */
+
+#console {
+	position: fixed;
+	height: 50px;
+	width: 100%;
+	vertical-align: middle;
+	bottom: 0px;
+	left: 0px;
+	background-color: #CCCCCC;
+}
+
+/* end Console Style */
+
+
+
+/* console always on top compensation */
+
+#extra_heigh{
+	height: 50px;
+	width: 100%;
+	bottom: 0px;
+	left: 0px;
+}
+
+/* end compensation */
+
+
+/*
+ * Regarding to Rules
+ */
+
+.rules-lef
+{
+	width: 20%;
+}
+
+.rules-rig
+{
+	width: 80%;
+	vertical-align: top;
+}
+
+
+#rules-manipulation
+{
+	height: 100%;
+}
+
+#rules-all
+{
+   width: 100%;
+   height: 200px;
+   position: relative;
+}
+
+
+#rules-cart
+{
+   width: 79%;
+   margin: 0 auto;
+   min-height: 200px;
+   overflow-x: hidden;
+   overflow-y: scroll;
+   /* position: absolute; */
+}
+
+
+#rules-cart .acl-item
+{
+   padding: 0 5px;
+   border: 1px dashed black;
+   /* position: absolute; */
+}
+
+
+#rules-cart .rule-perm-allow
+{
+   padding: 0 24px;
+   border: 1px dashed #00DD00;
+   /* position: absolute; */
+}
+
+#rules-cart .rule-perm-deny
+{
+   padding: 0 25px;
+   border: 1px dashed red;
+   /* position: absolute; */
+}
+
+
+#sectionB
+{
+   clear:both;
+   width: 100%;
+}
+
+
+#list-rules ul {
+	list-style-type: none;
+	text-align: center;
+	margin: -10px 0 0 0;
+	padding:0;
+}
+
+#list-rules li {
+	display: inline-block;
+	padding:20px 40px;
+	border: 2px solid orange;
+	text-decoration:none;
+}
+
+#rules-content {
+	border: 1px solid #CCCCCC;
+}
+
+#rules-rul {
+	height: 100px;
+	margin-top: 15px;
+}
+
+.h-16 {
+	margin-top: -16px
+}
+
+
+/*
+ * End Regarding to rules
+ */
+
+
+
+.hidden-content {
+	display: none;
+}
+
+
+
+
+
+
+/* fill stuff not in use */
+.radio {
+	position:relative; /* Position so children are relative to this container */
+	border:0; /* Remove the border */
+}
+.radio span {
+	position:absolute; /* Take the content of the legend out of flow */
+	top:0;left:0; /* and position it to the top left of the fieldset */
+	width:5em; /* Same width as labels */
+}
+.radio ul {
+	margin-left:5em; /* Since the legend is out of flow. set margin, so inputs are inline */
+	list-style:none; /* Dont want bullets */
+}
+.radio li {
+	position:relative; /* Fix a bug in IE zoom functionality */
+	display:inline; /* Display the inputs in a line */
+	white-space:nowrap; /* We dont want a label to wrap between the input and label */
+}
+.radio label, .radio input {
+	width:auto; /* Reset the width on the label from the 5em, set earlier */
+	float:none; /* Reset the float from left on the label, set earlier */
+	vertical-align:middle; /* Align the radio buttons with the inputs */
+}

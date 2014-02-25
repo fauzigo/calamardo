@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+		<title>List Class test</title>
+		<meta name="description" content="Que vaina digalo" />
+		<meta name="author" content="Fauzi Gomez" />
+
+		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+		
+		<script src="./simpleList.js"></script>
+		
+		<script>
+			var tal = new node('tal');
+			
+			var tal1 = new node('tal1');
+			var tal2 = new node('tal2');
+			var tal3 = new node('tal3');
+			var tal4 = new node('tal4');
+			
+			
+			//tal.speak();
+			
+			var lista = new simpleList();
+			
+			lista.addLast(tal);
+			lista.addLast(tal1);
+			lista.addLast(tal2);
+			lista.addLast(tal3);
+			lista.addLast(tal4);
+			
+			document.writeln(lista.countList());
+			
+			
+		</script>
+
+		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+	</head>
+
+	<body>
+		<div>
+			<header>
+				<h1>test</h1>
+			</header>
+			<nav>
+				<p>
+					<a href="#">Home</a>
+				</p>
+				<p>
+					<a href="#">Contact</a>
+				</p>
+			</nav>
+
+			<div>
+
+			</div>
+
+			<footer>
+				<p>
+					&copy; Copyright  by calamardo.org
+				</p>
+			</footer>
+		</div>
+	</body>
+</html>

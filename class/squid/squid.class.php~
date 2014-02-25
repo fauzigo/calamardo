@@ -1,0 +1,170 @@
+<?PHP
+class squidConf {
+	protected $baseoptions;
+	protected $options;
+	private function baseConf($options){
+		$this->options = array (
+			'http_port'=>array ('0'=>'3128'),
+			'hierarchy_stoplist'=>'cgi-bin ?',
+			'cache_mem'=>'256 MB',
+			'cache_dir'=>'ufs /var/cache/squid/ 256 16 256',
+			'error_directory'=>'/usr/share/squid/errors/en',
+			'access_log'=>'/var/log/squid/access.log squid',
+			'cache_log'=>'/var/log/squid/cache.log',
+			'cache_store_log'=>'/var/log/squid/store.log',
+			'coredump_dir'=>'/var/log/squid/cache',
+			'logfile_rotate'=>'10',
+			'pid_filename'=>'/var/run/squid/squid.pid',
+			'cache_log'=>'/var/log/squid/cache.log',
+			'ftp_passive'=>'on',
+			'cache_effective_user'=>'nobody',
+			'cache_effective_group'=>'nobody');
+        	if ($options) {
+			$this->options = array_replace_recursive(
+				$this->options, $options);
+        	}
+	}
+	function baseAcls($options=NULL){
+		$this->optionsAcls = array (
+			'manager'=>array('proto','cache_object'),
+			'localhost'=>array('src','127.0.0.1/32'),
+			'to_localhost'=>array('dst','127.0.0.0/8 0.0.0.0/32'),
+			'localnet'=>array('src','10.0.0.0/8 192.168.0.0/16 172.16.0.0/12'),
+			'SSL_ports'=>array('port','443'),
+			'Safe_ports'=>array('port','80 21 443 70 210 1025-65535 280 488 591 777'),
+			'CONNECT'=>array('method','CONNECT'));
+        	if ($options) {
+			$this->optionsAcls = array_replace_recursive(
+				$this->optionsAcls, $options);
+        	}
+	}
+	function baseRules($options=NULL){
+        	if (!$options) {
+		$this->optionsRules = array (
+			array('icp_access', 'deny', 'all'),
+			array('http_access', 'allow', 'manager localhost'),
+			array('http_access', 'deny', 'manager'),
+			array('http_access', 'deny', '!Safe_ports'),
+			array('http_access', 'deny', 'CONNECT !SSL_ports'),
+			array('http_access', 'allow', 'localnet'),
+			array('http_access', 'allow', 'localhost'),
+			array('http_access', 'deny', 'all'));
+		}else{
+			$this->optionsRules = $options;
+		}
+	}
+	function squidConf($options=NULL, $acls=NULL, $rules=NULL){
+		//$this->baseConf($options);
+		//$this->baseAcls($acls);
+		//$this->baseRules($rules);		
+	}
+	function generate($path='/tmp/squid.conf'){
+		$file=fopen($path,'w');
+		$content='# Archivo generado por squidConf'.PHP_EOL;
+		foreach($this->options as $key => $value){
+			if(is_array($value)){
+				foreach ($value as $values){
+					$content.=$key.' '.$values.PHP_EOL;
+				}
+			}else{
+				$content.=$key.' '.$value.PHP_EOL;
+			}
+		}
+		foreach($this->optionsAcls as $name => $acl){
+			$content.='acl '.$name.' '.$acl[0].' '.$acl[1].PHP_EOL; 
+		}
+		foreach($this->optionsRules as $rule){
+			$content.=implode(' ',$rule).PHP_EOL; 
+		}
+		if (fwrite($file, $content)){
+			fclose($file);
+			return TRUE;
+		}else{
+			return FALSE;
+		}
+	}
+
+	function getAclTypes($typeName=NULL){
+		$ini=parse_ini_file("acls.ini", true);
+		if(!$typeName){
+			foreach($ini as $name => $content){
+				$res[$name]=TRUE;
+			}
+		}else{
+			$res=$ini[$typeName];
+		}
+		return $res;
+	}
+
+	function getAclClass($className=NULL){
+		$ini=parse_ini_file("acls.ini", true);
+		if(!$className){
+			foreach($ini as $name => $content){
+				$res[$content['class']]=TRUE;
+			}
+		}else{
+			foreach($ini as $name => $content){
+				if($content['class']==$className){
+					$res[$name]=TRUE;
+			}
+		}
+		return $res;
+	}
+
+
+
+
+
+
+
+
+
+	function getConfig($path='/etc/squid/squid.conf'){
+		$lines=file($path,FILE_IGNORE_NEW_LINES|FILE_SKIP_EMPTY_LINES);
+		foreach ($lines as $line){
+			$line=preg_replace('/\s\s+/', ' ',trim($line));
+			if(!preg_match('/^#/',$line)){
+				if(preg_match('/#/',$line)){
+				       	$line=trim(strstr($line, '#', TRUE));
+				}
+				$pieces=explode(' ',$line);	
+				if($pieces['0']=='acl'){
+					$aclList[$pieces['1']]['0']=$pieces['2'];
+					if(!isset($aclList[$pieces['1']]['1'])){
+						$aclList[$pieces['1']]['1']=implode(' ',array_slice($pieces, 3));
+					}else{
+						$aclList[$pieces['1']]['1'].=' '.implode(' ',array_slice($pieces, 3));
+					}
+				}elseif($pieces['0']=='http_access'|$pieces['0']=='icp_access'){
+					$accessList[]=array($pieces['0'],$pieces['1'], 
+						            implode(' ', array_slice($pieces, 2)));
+										
+				}else{
+					if(!isset($baseOptions)){
+						$baseOptions=array();
+					}
+
+					if(array_key_exists($pieces['0'], $baseOptions)){
+						if(is_array($baseOptions[$pieces['0']])){
+							$baseOptions[$pieces['0']][]=implode(' ', array_slice($pieces, 1));
+						}else{
+							$temp=$baseOptions[$pieces['0']];
+							unset($baseOptions[$pieces['0']]);
+							$baseOptions[$pieces['0']][]=$temp;
+							$baseOptions[$pieces['0']][]=implode(' ', array_slice($pieces, 1));	
+						}
+					}else{
+						$baseOptions[$pieces['0']]=implode(' ', array_slice($pieces, 1));
+					}
+			
+				}
+
+			}
+		}
+		//$this->baseAcls($aclList);
+		//$this->baseRules($accessList);
+		//$this->baseConf($baseOptions);
+	}
+
+}
+?>

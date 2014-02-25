@@ -1,0 +1,1 @@
+{"manager":["proto","cache_object"],"localhost":["src","127.0.0.1\/32"],"to_localhost":["dst","127.0.0.0\/8 0.0.0.0\/32"],"localnet":["src","10.0.0.0\/8 192.168.0.0\/16 172.16.0.0\/12"],"SSL_ports":["port","443"],"Safe_ports":["port","80 21 443 70 210 1025-65535 280 488 591 777"],"CONNECT":["method","CONNECT"]}
